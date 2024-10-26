@@ -6,6 +6,8 @@
 
 A customizable React typing animation component for displaying dynamic typing and deleting effects. Perfect for adding interactive typewriter animations to your project.
 
+**[한국어 설명서 보기](./README.ko.md)**
+
 [npm_url]: https://www.npmjs.com/package/@hansolbangul/animated-typo
 
 ## Installation
@@ -23,9 +25,9 @@ pnpm add @hansolbangul/animated-typo
 
 This library requires `react` and `react-dom` version `^17.0.0` or higher.
 
-## Live Demo
-
-Visit the live demo and explore examples here: [https://hansolbangul.github.io/typing-animated](https://hansolbangul.github.io/typing-animated)
+[//]: # (## Live Demo)
+[//]: # ()
+[//]: # (Visit the live demo and explore examples here: [https://hansolbangul.github.io/typing-animated]&#40;https://hansolbangul.github.io/typing-animated&#41;)
 
 ## Usage
 
