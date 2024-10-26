@@ -3,26 +3,35 @@ import { useEffect, useState } from 'react';
 interface Props {
   ms: number;
   wait: number;
+  loop?: number;
   text: string;
 }
 
-export function TypoAnimated({ text, ms, wait }: Props) {
+export function TypoAnimated({ text, ms, wait, loop = -1 }: Props) {
   const [typing, setTyping] = useState('');
 
   useEffect(() => {
+    let remainingLoops = loop;
+
     const run = function* () {
-      while (1) {
+      while (remainingLoops > 0 || remainingLoops === -1) {
         for (let i = 0; i <= text.length; i++) {
           yield text.slice(0, i);
         }
 
         yield new Promise((resolve) => setTimeout(resolve, ms));
 
-        for (let i = text.length - 1; i >= 0; i--) {
-          yield text.slice(0, i);
+        if (remainingLoops !== 1) {
+          for (let i = text.length - 1; i >= 0; i--) {
+            yield text.slice(0, i);
+          }
+
+          yield new Promise((resolve) => setTimeout(resolve, ms));
         }
 
-        yield new Promise((resolve) => setTimeout(resolve, ms));
+        if (remainingLoops > 0) {
+          remainingLoops--;
+        }
       }
     };
 
@@ -42,9 +51,9 @@ export function TypoAnimated({ text, ms, wait }: Props) {
     handleIteration();
 
     return () => {
-      iterator.return();
+      iterator.return?.();
     };
-  }, [text, ms, wait]);
+  }, [text, ms, wait, loop]);
 
   return <>{typing}</>;
 }
